@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Cautious Drive</title>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"></link>
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet"> </link>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+        
+        <style>
+/*            body {
+            font-family: Verdana, Geneva, sans-serif;
+        }*/
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            display: none;
+            position: relative; 
+        }
+      /*//////////////////////////////////////*/
+        .inputGroup {
+	 background-color: #fff;
+	 display: block;
+	 margin: 10px 0;
+	 position: relative;
+        }
+        .inputGroup label {
+	 padding: 12px 30px;
+	 width: 100%;
+	 display: block;
+	 text-align: left;
+	 color: #3c454c;
+	 cursor: pointer;
+	 position: relative;
+	 z-index: 2;
+	 transition: color 200ms ease-in;
+	 overflow: hidden;
+        }
+        .inputGroup label:before {
+	 width: 10px;
+	 height: 10px;
+	 border-radius: 50%;
+	 content: '';
+	 background-color: #5562eb;
+	 position: absolute;
+	 left: 50%;
+	 top: 50%;
+	 transform: translate(-50%, -50%) scale3d(1, 1, 1);
+	 transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+	 opacity: 0;
+	 z-index: -1;
+        }
+        .inputGroup label:after {
+	 width: 32px;
+	 height: 32px;
+	 content: '';
+	 border: 2px solid #d1d7dc;
+	 background-color: #fff;
+	 background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
+	 background-repeat: no-repeat;
+	 background-position: 2px 3px;
+	 border-radius: 50%;
+	 z-index: 2;
+	 position: absolute;
+	 right: 30px;
+	 top: 50%;
+	 transform: translateY(-50%);
+	 cursor: pointer;
+	 transition: all 200ms ease-in;
+        }
+        .inputGroup input:checked ~ label {
+	 color: #fff;
+        }
+        .inputGroup input:checked ~ label:before {
+	 transform: translate(-50%, -50%) scale3d(56, 56, 1);
+	 opacity: 1;
+        }
+        .inputGroup input:checked ~ label:after {
+	 background-color: #54e0c7;
+	 border-color: #54e0c7;
+        }
+        .inputGroup input {
+	 width: 32px;
+	 height: 32px;
+	 order: 1;
+	 z-index: 2;
+	 position: absolute;
+	 right: 30px;
+	 top: 50%;
+	 transform: translateY(-50%);
+	 cursor: pointer;
+	 visibility: hidden;
+        }
+        .form {
+	 padding: 0 16px;
+	 max-width: 550px;
+	 margin: 50px auto;
+	 font-size: 18px;
+	 font-weight: 600;
+	 line-height: 36px;
+        }
+        body {
+	 background-color: #d1d7dc;
+	 font-family: 'Fira Sans', sans-serif;
+        }
+        *, *::before, *::after {
+	 box-sizing: inherit;
+        }
+        html {
+	 box-sizing: border-box;
+        }
+        code {
+	 background-color: #9aa3ac;
+	 padding: 0 8px;
+        }
+        
+    </style>
+    
+        
+           
+    </h:head>
+    
+    <h:body style="background-image:url('/CautiousDrive/navigation.jpg'); background-size:cover">
+           
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid" style="float:left; margin-left:0px; padding-left:0px; display: inline-block; vertical-align:">
+                <div class="navbar-header" >
+                    <a class="navbar-brand" href="/CautiousDrive/index.xhtml" style="font-size:25px; margin-left:0px; float:left">Cautious Drive</a>
+                </div>    
+                <ul class="nav navbar-nav" style="font-size:20px; display: inline-block; vertical-align:">
+                <li> <a href="/CautiousDrive/index.xhtml">Home</a></li>
+                <li> <a href="/CautiousDrive/responseTest.xhtml">Response Test</a></li>
+                <li> <a href="/CautiousDrive/memoryTest.xhtml">Memory Test</a></li>
+<!--                <li> <a href="/CautiousDrive/index.xhtml"></a></li>-->
+                </ul>
+<!--                <form class="navbar-form navbar-left" action="/action_page.php" style="padding-left: 800px">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search..." name="search" style="font-size:20px; width: 400px"></input>
+                        <div class="input-group-btn" style="padding-right:0px">
+                            <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>-->
+            </div>
+        </nav>
+
+        <div style="font-size:33px; padding-top: 20px">
+            <div id="testResult">
+                <center>
+                    <h1 style="font-size:33px; font-weight: bold">Congratulations!!! Your test Current fatigue level is low!!!</h1>   
+                </center>
+            </div>   
+        </div>   
+<!--            <div>
+                <p style="font-size:25px;">Checklist</p>
+                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" style="font-size:50px;"/>
+                <label for="seatbelt"> Seatbelt </label><br/>
+                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car" style="font-size:25px;"/>
+                <label for="drink"> Drink</label><br/>
+                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat" style="font-size:25px;"/>
+                <label for="sleepy"> Sleepy</label><br/>
+            </div>   -->
+        
+        <div style="margin-top:100px;font-size:25px">
+<!--            <center>
+                <h2>Please check following item if you have done before your journey!</h2>
+            </center>-->
+         <h:form class="form">
+
+            <h2>Please check following item if you have done before your journey !!!</h2>
+            <div class="inputGroup" style="margin-top:20px">
+                <input id="option1" name="option1" type="checkbox" />
+                <label for="option1">Oil leakage examination</label>
+            </div>
+
+            <div class="inputGroup">
+                <input id="option2" name="option2" type="checkbox" />
+                <label for="option2">Obstacles check around the car</label>
+            </div>
+            <div class="inputGroup">
+                <input id="option3" name="option3" type="checkbox" />
+                <label for="option3">Wear of the tires examination</label>
+            </div>
+            <div class="inputGroup">
+                <input id="option4" name="option4" type="checkbox" />
+                <label for="option4">Light check</label>
+            </div>
+            <div class="inputGroup">
+                <input id="option5" name="option5" type="checkbox" />
+                <label for="option5">Seat belt check</label>
+            </div>
+            
+        </h:form>
+        </div>
+        
+            
+           
+            
+         
+        
+
+        
+        
+ 
+
+        <div style="padding-top: 65px">
+        <center>
+            <button onclick="location.href='/CautiousDrive/index.xhtml'" class="btn btn-primary" style="font-size:25px;margin-top:30px">Home</button>
+        </center>  
+        </div>
+        
+<!--        <div style="margin-top: 20px">
+        <center>
+            <button onclick="location.href='/NativeAnimals/user/rescueRecords.xhtml'" class="btn btn-primary" style="font-size:25px;margin-top:30px">User Login</button>
+        </center>
+        </div>-->
+
+        
+        
+
+
+
+    </h:body>
+    
+    
+    
+    
+</html>
